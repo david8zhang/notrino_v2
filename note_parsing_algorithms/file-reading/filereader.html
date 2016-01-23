@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Include Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <title>File Reading in Javascript</title>
+    </head>
+    <body>
+        <input id="note_file" type="file">
+        <button onclick=readFile()>Parse Text File!</button>
+        <script>
+            // Use the HTML5 file reading api
+            var reader = new FileReader();
+
+            // Specify reader's onload functionality
+            reader.onload = function(event) {
+                var contents = event.target.result;
+                console.log(contents);
+            };
+
+            // Specify what to do if reader encounters an error
+            reader.onerror = function(event) {
+                console.error("File could not be read! Code " + event.target.error.code);
+            };
+
+            // Read the file
+            function readFile() {
+                // Create the new file
+                var file = $('#note_file').get(0).files[0];
+                console.log(file);
+                reader.readAsText(file)
+                console.log(reader.result);
+            }
+        </script>
+    </body>
+</html>

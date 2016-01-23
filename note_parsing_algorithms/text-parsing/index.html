@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Include Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <title>Text Parsing Algorithm</title>
+    </head>
+    <body>
+        <textarea id="editbox" name="name" rows="8" cols="40"></textarea>
+        <br>
+        <button onclick="getValue()">Get Text!</button>
+        <button onclick="getKeyConcepts()">Get Concepts!</button>
+        <button onclick="getSubConcepts()">Get SubConcepts!</button>
+        <br>
+        <button onclick="generateQuestions()">Get Questions!</button>
+    </body>
+
+    <script>
+    var concept_mapping = {};
+
+    // Get the value and parse it
+    function getValue() {
+        var stringArr = $("#editbox").val().split("\n");
+        var concept_array = [];
+        console.log(stringArr);
+        for(var i = 0; i < stringArr.length; i++) {
+            var string = stringArr[i];
+            console.log(string + "," + (string == ""));
+            if(string != "") {
+                if(isUpperCase(string)) {
+                    var new_arr = [];
+                    concept_mapping[string] = new_arr;
+                    concept_array = new_arr;
+                } else {
+                    concept_array.push(string);
+                }
+            }
+        }
+        console.log(concept_mapping);
+    }
+
+    // Check if a string is all upperCase
+    function isUpperCase(string) {
+        for(var i = 0; i < string.length; i++) {
+            var character = string.charAt(i);
+            if(character != character.toUpperCase()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Get the key concepts from a key-value mapping
+    function getKeyConcepts() {
+        var key_concepts = [];
+        for (var key in concept_mapping) {
+            key_concepts.push(key);
+        }
+        return key_concepts;
+    }
+
+    // Get sub concepts for a key-value mapping
+    function getSubConcepts() {
+        var sub_concepts = [];
+        for(var key in concept_mapping) {
+            sub_concepts.push(concept_mapping[key]);
+        }
+        return sub_concepts;
+    }
+
+    // Genereate a list of questions and log in the form of a dictionary
+    function generateQuestions() {
+        var question_mapping = {};
+        var string = "Which one of these does not relate to "
+        var count = 0;
+        for(key in concept_mapping) {
+            var question = string + lowerCase(key) + "?";
+            var concepts = getSubConcepts();
+            concepts.splice(count, 1);
+            question_mapping[question] = genAnswers(concepts, concept_mapping[key]);
+            count = count + 1;
+        }
+        console.log(question_mapping);
+    }
+
+    // Generate a list of answers where one is wrong
+    function genAnswers(allSubs, correctSubs) {
+        var answers = [];
+        var wrongSet = Math.floor(Math.random() * (allSubs.length - 1));
+        var replacedIndex = Math.floor(Math.random() * (correctSubs.length - 1));
+        var randWrong = Math.floor(Math.random() * (allSubs[wrongSet].length - 1));
+        for(var i = 0; i < correctSubs.length; i++) {
+            if(i == replacedIndex) {
+                answers[i] = allSubs[0][randWrong];
+            } else {
+                answers[i] = correctSubs[i];
+            }
+        }
+        return shuffle(answers);
+    }
+
+    // Convert the string to all lowercase
+    function lowerCase(string) {
+        var lowered = "";
+        for(var i = 0; i < string.length; i++) {
+            lowered = lowered + string.charAt(i).toLowerCase();
+        }
+        return lowered;
+    }
+
+    // Shuffle the answer array
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle
+        while(currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex = currentIndex - 1;
+
+            // Swap it with the current element
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    }
+
+    </script>
+</html>
