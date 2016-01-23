@@ -16,4 +16,10 @@ router.route('/users/index')
 router.route('/users/update')
 	.post(userController.updateUser);
 
+router.route('/questions/pools/create')
+	.post(qpoolController.createQPool);
+
+router.route('/questions/pools/index')
+	.get(qpoolController.getQPool);
+	
 module.exports = router;
