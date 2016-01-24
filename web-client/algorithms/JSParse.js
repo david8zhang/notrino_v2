@@ -24,26 +24,25 @@ function fourRand(range, exception) {
         }
     }
     randList = shuffle(randList);
+    randList.push(exception);
     return randList;
-}
+};
 
 function generateQuestions(wordList, defList) {
+    var pool = {};
     for (i = 0; i < wordList.length; i++) {
-        console.log("What is " + wordList[i] + "?");
         var answerList = fourRand(wordList.length, i);
-        var myChoices = "Choices: ";
-        myChoices += defList[answerList[0]];
-        for (j = 1; j < 4; j++) {
-            myChoices += ", " + defList[answerList[j]];
+        var myChoices = [];
+        for (j = 0; j < 5; j++) {
+            myChoices.push(defList[answerList[j]]);
         }
-        console.log(myChoices);
+        pool[wordList[i]] = myChoices;
     }
+    console.log(pool);
+    return pool;
 };
 
 function parseText(fileContents) {
-
-    console.log(fileContents);
-
     var colonArray = [];
     var stringArray = fileContents.split("\n");
     var defHash = new Object();

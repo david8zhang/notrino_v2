@@ -5,6 +5,7 @@ function parseString(fileContents) {
     var relational_questions = {};
     var stringArr = fileContents.split("\n");
     var concept_array = [];
+    var question_pools = [];
     for(var i = 0; i < stringArr.length; i++) {
         var string = stringArr[i];
         if(string != "" && string.charCodeAt(0) != 13) {
@@ -19,10 +20,17 @@ function parseString(fileContents) {
     }
     relational_questions = generateRelationQ(concept_mapping);
     console.log(relational_questions);
+    question_pools.push(relational_questions);
+    
     fillblank_questions = generateFillBlankQ(concept_mapping);
     console.log(fillblank_questions);
+    question_pools.push(fillblank_questions);
+
     truefalse_questions = generateTrueFalseQ(concept_mapping);
     console.log(truefalse_questions);
+    question_pools.push(truefalse_questions);
+
+    return question_pools;
 }
 
 // Generate relational questions
@@ -59,7 +67,7 @@ function getKeyConcepts(kv_mapping) {
 }
 
 
-// Generate a list of answers where one is wrong
+// Generate a list of answers where one is wrong (right)
 function genRelationalAnswers(allSubs, correctSubs) {
     var answers = [];
     var wrongSet = Math.floor(Math.random() * (allSubs.length - 1));
@@ -72,6 +80,7 @@ function genRelationalAnswers(allSubs, correctSubs) {
             answers[i] = correctSubs[i];
         }
     }
+    answers.push(allSubs[0][randWrong]);
     return shuffle2(answers);
 }
 
@@ -105,21 +114,23 @@ function genFillBlankAnswers(allconcepts, key) {
             answers[i] = allconcepts[i];
         }
     }
+    answers.push(key);
     return shuffle2(answers);
 }
 
 // Generate a true false question
 function generateTrueFalseQ(kv_mapping) {
     var question_mapping = {};
-    var answers = [true, false];
     var count = 0;
     for(var key in kv_mapping) {
+        var answers = ["true", "false"];
         var sub_concepts = kv_mapping[key];
         var trueFalse = Math.random();
         if(trueFalse >= 0.5) {
             var randTerm = Math.floor(Math.random() * (sub_concepts.length - 1));
             var question = sub_concepts[randTerm] + " refers to " + key;
             question_mapping[question] = answers;
+            answers.push("true");
         } else {
             var subconcepts = getSubConcepts(kv_mapping);
             var randSet = Math.floor(Math.random() * (subconcepts.length - 1));
@@ -127,6 +138,7 @@ function generateTrueFalseQ(kv_mapping) {
             var randWrong = Math.floor(Math.random() * (wrongSet.length - 1));
             var question = wrongSet[randWrong] + " refers to " + key;
             question_mapping[question] = shuffle2(answers);
+            answers.push("false");
         }
         count = count + 1;
     }

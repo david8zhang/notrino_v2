@@ -34,6 +34,9 @@
 		<br>
 		<br>
 		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
+		<br>
+		<br>
+		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
 		<a href="login.html">Login Here</a>
 	</div>
 
@@ -43,10 +46,12 @@
 		var reader = new FileReader();
 		var contents = "";
 		var isDefs = false;
+		var questionPool = [];
 
 	    // Read the file, parse it and generate questions
         function readFile() {
-            var file = $('#file-chooser').get(0).files[0];            
+            var file = $('#file-chooser').get(0).files[0]; 
+            isDefs = false;           
             reader.readAsText(file)
         }
 
@@ -60,9 +65,9 @@
         reader.onload = function(event) {
             contents = event.target.result;
             if(isDefs) {
-            	parseText(contents);
+            	questionPool = parseText(contents);
             } else {
-            	parseString(contents);
+            	questionPool = parseString(contents);
             }
         };
 
@@ -71,6 +76,17 @@
             console.error("File could not be read! Code " + event.target.error.code);
         };
 
+        function genQuestionPool() {
+        	var params = {};
+        	params.qpool_name = "Question";
+        	params.questions = 
+        	$.ajax({
+				type: "POST",
+				url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/create",
+				data: params,
+				success: onSuccess
+			});
+        }
 
 		function handleFile(event) {
 			AWS.config.region = 'us-east-1'		
