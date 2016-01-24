@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="./javascripts/jquery.min.js"></script>
+	<script src="./javascripts/jquery.js"></script>
+
+	<title>Login</title>
+	<h3>Email</h3>
+	<input id="email" type="text"/>
+	<br/>
+	<h3>Password</h3>
+	<input id="password" type="password"/>
+	<br/>
+	<br/>
+	<input onClick="login()" type="submit"/>
+	<a href="index.html">Back to Home</a>
+</head>
+<body>
+	<script type="text/javascript">
+		function login() {
+			var email = $("#email").val();
+			var password = $("#password").val();
+			params = {};
+			params.email = email;
+			params.password = password;
+			$.ajax({
+				type: "POST",
+				url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/users/login",
+				data: params,
+				success: onSuccess
+			});
+		}
+
+		function onSuccess(data, textStatus, jqXHR) {
+			localStorage.setItem("user_id", data.Items[0].user_id);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>GCM test</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- AWS sdk and JQUERY -->
+	<script src="./javascripts/aws-sdk.min.js"></script>
+	<script src="./javascripts/jquery.min.js"></script>
+	<script src="./javascripts/jquery.js"></script>
+	<script src="./javascripts/amazon-cognito.min.js"></script>
+
+	<div class="container">
+		<p>For testing if the Google Cloud Messaging Service actually works or not</p>
+		<input id="file-chooser" type="file"/>
+		<br>
+		<button onClick="handleFile()" class="btn btn-primary">Submit file! </button>
+		<a href="login.html">Login Here</a>
+	</div>
+
+
+</head>
+<body>
+	<script type="text/javascript">
+		function handleFile(event) {
+			AWS.config.region = 'us-east-1'		
+			AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+				IdentityPoolId: 'us-east-1:25457026-c042-4aa1-b844-be70570b71ec',
+			});
+			var bucket = new AWS.S3({
+				params: {
+					Bucket: 'notrino-notes'
+				}
+			})
+			var file = $("#file-chooser")[0].files[0];
+			var filename = localStorage.getItem("user_id");
+			if(file) {
+				var params = {
+					Key: filename,
+					ContentType: file.type,
+					Body: file
+				}
+			}
+			bucket.putObject(params, function(err, data) {
+				if(err) {
+					console.log(err); 
+				} else {
+					console.log(data);
+				}
+			});
+		}
+	</script>
+</body>
+</html>
