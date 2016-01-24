@@ -14,6 +14,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var cors = require('cors');
 
 // Configure the router
 var router = require('./routes/routes.js');
@@ -21,6 +22,7 @@ var router = require('./routes/routes.js');
 //Set up express
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(cors());
 
 //Parse the application's json data
 app.use(bodyParser.json());
