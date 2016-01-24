@@ -25,7 +25,7 @@
 		<br>
 		<button onClick="handleFile()" class="btn btn-primary">Submit file! </button>
 		<a href="login.html">Login Here</a>
-	</div>
+		</div>
 
 
 </head>
@@ -43,6 +43,7 @@
 			})
 			var file = $("#file-chooser")[0].files[0];
 			var filename = localStorage.getItem("user_id");
+			console.log(filename);
 			if(file) {
 				var params = {
 					Key: filename,
@@ -57,6 +58,10 @@
 					console.log(data);
 				}
 			});
+		}
+
+		function onSuccess(data, textStatus, jqXHR) {
+			console.log(data);
 		}
 	</script>
 </body>
