@@ -42,7 +42,7 @@
 				}
 			})
 			var file = $("#file-chooser")[0].files[0];
-			var filename = localStorage.getItem("user_id") + ".jpg";
+			var filename = localStorage.getItem("user_id");
 			if(file) {
 				var params = {
 					Key: filename,
