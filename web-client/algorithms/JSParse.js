@@ -1,11 +1,18 @@
-function shuffle(randList) {
-    for (z = 4; z >= 0; z--) {
-        var temp = randList[z - 1];
-        var switchPos = Math.floor(Math.random() * z);
-        randList[z - 1] = randList[switchPos];
-        randList[switchPos] = temp;
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle
+    while(currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex = currentIndex - 1;
+
+        // Swap it with the current element
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
     }
-    return randList;
+
+    return array;
 };
 
 function fourRand(range, exception) {
@@ -17,6 +24,7 @@ function fourRand(range, exception) {
         }
     }
     randList = shuffle(randList);
+    randList.push(exception);
     return randList;
 };
 
@@ -25,7 +33,7 @@ function generateQuestions(wordList, defList) {
     for (i = 0; i < wordList.length; i++) {
         var answerList = fourRand(wordList.length, i);
         var myChoices = [];
-        for (j = 0; j < 4; j++) {
+        for (j = 0; j < 5; j++) {
             myChoices.push(defList[answerList[j]]);
         }
         pool[wordList[i]] = myChoices;
