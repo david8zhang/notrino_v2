@@ -1,8 +1,8 @@
 function shuffle(randList) {
-    for (z = 3; z >= 0; z--) {
-        var temp = randList[z];
+    for (z = 4; z >= 0; z--) {
+        var temp = randList[z - 1];
         var switchPos = Math.floor(Math.random() * z);
-        randList[z] = randList[switchPos];
+        randList[z - 1] = randList[switchPos];
         randList[switchPos] = temp;
     }
     return randList;
