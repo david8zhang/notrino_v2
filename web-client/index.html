@@ -19,18 +19,75 @@
 	<script src="./javascripts/jquery.js"></script>
 	<script src="./javascripts/amazon-cognito.min.js"></script>
 
+	<!-- Our algorithms -->
+	<script src="./algorithms/JSParse.js"></script>
+	<script src="./algorithms/format-parser.js"></script>
+
 	<div class="container">
-		<p>For testing if the Google Cloud Messaging Service actually works or not</p>
+		<p>For testing the note-parsing algorithms</p>
 		<input id="file-chooser" type="file"/>
 		<br>
 		<button onClick="handleFile()" class="btn btn-primary">Submit file! </button>
+		<br>
+		<br>
+		<button onClick="readFile()" class="btn btn-primary">Create MCQ </button>
+		<br>
+		<br>
+		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
+		<br>
+		<br>
+		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
 		<a href="login.html">Login Here</a>
-		</div>
-
+	</div>
 
 </head>
 <body>
 	<script type="text/javascript">
+		var reader = new FileReader();
+		var contents = "";
+		var isDefs = false;
+		var questionPool = [];
+
+	    // Read the file, parse it and generate questions
+        function readFile() {
+            var file = $('#file-chooser').get(0).files[0]; 
+            isDefs = false;           
+            reader.readAsText(file)
+        }
+
+        function createDef() {
+        	var file = $('#file-chooser').get(0).files[0];
+        	isDefs = true;
+        	reader.readAsText(file);
+        }
+
+        // Specify reader's onload functionality
+        reader.onload = function(event) {
+            contents = event.target.result;
+            if(isDefs) {
+            	questionPool = parseText(contents);
+            } else {
+            	questionPool = parseString(contents);
+            }
+        };
+
+        // Specify what to do if reader encounters an error
+        reader.onerror = function(event) {
+            console.error("File could not be read! Code " + event.target.error.code);
+        };
+
+        function genQuestionPool() {
+        	var params = {};
+        	params.qpool_name = "Question";
+        	params.questions = 
+        	$.ajax({
+				type: "POST",
+				url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/create",
+				data: params,
+				success: onSuccess
+			});
+        }
+
 		function handleFile(event) {
 			AWS.config.region = 'us-east-1'		
 			AWS.config.credentials = new AWS.CognitoIdentityCredentials({
