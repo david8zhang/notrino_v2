@@ -24,50 +24,29 @@ exports.handler = function(event, context) {
 					user_id: srcKey
 				}
 			};
-			// client.get(rest_url + "/users/index", args, function(data, response) {
-			// 	reg_token = data.Items[0].reg_token;
-			// 	var newArgs = {
-			// 		parameters: {
-			// 			"to": reg_token,
-			// 			"notification": {
-			// 				"body": "Hello from server!",
-			// 				"title": "Hello from server!",
-			// 				"sound": "default",
-			// 				"click_action": "OPEN_MAIN_ACTIVITY"
-			// 			},
-			// 			"data": {
-			// 				"message" : "Hello!"
-			// 			} 
-			// 		},
-			// 		headers: {
-			// 			"Authorization": "key=" + API_KEY,
-			// 			"Content-Type": "application/json"
-			// 		}
-			// 	};
-			// 	client.post(url, newArgs, function(data, response) {
-			// 		console.log(response);
-			// 		console.log(data);
-			// 	});
-			// });
+			client.get(rest_url + "/users/index", args, function(data, response) {
+				console.log(data);
+			});
 			var args = {
 				parameters: {
-					to: reg_token,
-					notification: {
-						body: "Hello from server!",
-						title: "Hello from server!",
-						sound: "default",
-						click_action: "OPEN_MAIN_ACTIVITY"
+					'to': reg_token,
+					'notification': {
+						'body': "Hello from server!",
+						'title': "Hello from server!",
+						'sound': "default",
+						'click_action': "OPEN_MAIN_ACTIVITY"
 					},
-					data: {
-						message: "Hello!"
+					'data': {
+						'message': "Hello!"
 					}
 				},
 				headers: {
 					"Authorization":"key=AIzaSyAd8KBTB4FZ-_18cCuf3q81Zsu6Yi_KElY",
-					"Content-Type": "application/json"
+					"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
 				}
 			}
 			client.post(url, args, function(data, response) {
+				console.log(data);
 				console.log(response);
 			})
 
