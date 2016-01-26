@@ -19,6 +19,7 @@ import java.util.Map;
 
 import notrino.gcm_android.controllers.AppController;
 import notrino.gcm_android.models.Constants;
+import notrino.gcm_android.models.DataModelManager;
 import notrino.gcm_android.models.DataRequest;
 
 /**
@@ -44,12 +45,7 @@ public class ApiManager {
         protected String doInBackground(String... strings) {
             password = strings[0];
             email = strings[1];
-            InstanceID instanceID = InstanceID.getInstance(context);
-            try {
-                regToken = instanceID.getToken(Constants.SENDER_ID, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            regToken = DataModelManager.regToken;
             return null;
         }
 
@@ -119,6 +115,7 @@ public class ApiManager {
         }.execute();
     }
 
+    /** Update the user object with a regToken.*/
     public void updateUser(String user_id, String regToken) {
         HashMap<String, String> newParams = new HashMap<>();
         System.out.println("userid: " + user_id);

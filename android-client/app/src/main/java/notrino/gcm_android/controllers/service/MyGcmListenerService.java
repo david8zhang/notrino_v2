@@ -1,4 +1,4 @@
-package notrino.gcm_android.utils;
+package notrino.gcm_android.controllers.service;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,22 +8,24 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
-import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-import notrino.gcm_android.R;
 import notrino.gcm_android.views.activities.MainActivity;
 
 /**
- * Created by david_000 on 1/23/2016.
+ * Created by david_000 on 1/26/2016.
  */
-public class MessageService extends GcmListenerService {
+public class MyGcmListenerService extends GcmListenerService {
+
+    private static final String TAG = "MyGcmListenerService";
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
-        sendNotification(message);
+        if(from.startsWith("/topics/")) {
+            sendNotification(message);
+        }
     }
 
     private void sendNotification(String message) {
