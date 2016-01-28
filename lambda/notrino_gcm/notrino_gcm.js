@@ -1,6 +1,7 @@
 var async = require('async');
 var util = require('util');
 var Client = require('node-rest-client').Client;
+var gcm = require('node-gcm');
 
 exports.handler = function(event, context) {
 	//Google cloud messaging
@@ -10,9 +11,6 @@ exports.handler = function(event, context) {
 	var rest_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1";
 	var srcBucket = event.Records[0].s3.bucket.name;
 
-	//Get rid of this
-	var reg_token = "dh-L2Ibng58:APA91bG9Ymq6CDWcEgMiU80R-hFzlvKK_xzpeSMJxbha3TAWCbxPIoaqRIexQCgVEIhN5NuViLfRGkoHMvXh74mHRwyyWYHfTqxvO66epxwiI3wLp_4NwMbXP7sexVyCkNjUCqRZLXY_"
-
 	//Get the bucket name
 	var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
 	async.waterfall([
@@ -21,33 +19,22 @@ exports.handler = function(event, context) {
 			var client = new Client();
 			var args = {
 				parameters: {
-					user_id: srcKey
+					user_id: srcKey 
 				}
 			};
 			client.get(rest_url + "/users/index", args, function(data, response) {
-				console.log(data);
+				reg_token = data.Items[0].reg_token;
 			});
-			var args = {
-				parameters: {
-					'to': reg_token,
-					'notification': {
-						'body': "Hello from server!",
-						'title': "Hello from server!",
-						'sound': "default",
-						'click_action': "OPEN_MAIN_ACTIVITY"
-					},
-					'data': {
-						'message': "Hello!"
-					}
-				},
-				headers: {
-					"Authorization":"key=AIzaSyAd8KBTB4FZ-_18cCuf3q81Zsu6Yi_KElY",
-					"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-				}
-			}
-			client.post(url, args, function(data, response) {
-				console.log(data);
-				console.log(response);
+			var reg_tokens = [reg_token];
+			var sender = new gcm.Sender(API_KEY);
+			sender.send(message, { registrationTokens: regTokens }, function(err, response) {
+				if(err) console.log(err);
+				else console.log(response);
+			});
+
+			sender.sendNoRetry(message, {topic: '/topic/global'}, function(err, response) {
+				if(err) console.log(err);
+				else console.log(response);
 			})
 
 		}
