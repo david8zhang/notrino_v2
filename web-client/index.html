@@ -78,19 +78,22 @@
 
         /** Generate a bunch of questions. */
         function genQuestions() {
+        	var count = 0;
+        	var questionPools = [];
         	for (var key in questionPool) {
         		var params = {};
         		params.text = key;
         		var choices = questionPool[key];
         		params.choices = choices;
         		params.answer = findAnswers(choices);
-        		$.ajax({
-        			type: "POST",
-        			url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/create",
-        			data: params,
-        			success: onSuccess
-        		})
+        		questionPools.push(params);
         	}
+        		// $.ajax({
+        		// 	type: "POST",
+        		// 	url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/create",
+        		// 	data: params,
+        		// 	success: onSuccess
+        		// });
         }
 
         /** Find the answers to the choices by checking for duplicates. */
