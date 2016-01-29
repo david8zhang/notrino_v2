@@ -36,7 +36,7 @@
 		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
 		<br>
 		<br>
-		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
+		<button onClick="sendQuestions()" class="btn btn-primary">Send Questions </button>
 		<a href="login.html">Login Here</a>
 	</div>
 
@@ -76,16 +76,49 @@
             console.error("File could not be read! Code " + event.target.error.code);
         };
 
-        function genQuestionPool() {
+        /** Generate a bunch of questions. */
+        function genQuestions() {
+        	for (var key in questionPool) {
+        		var params = {};
+        		params.text = key;
+        		var choices = questionPool[key];
+        		params.choices = choices;
+        		params.answer = findAnswers(choices);
+        		$.ajax({
+        			type: "POST",
+        			url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/create",
+        			data: params,
+        			success: onSuccess
+        		})
+        	}
+        }
+
+        /** Find the answers to the choices by checking for duplicates. */
+        function findAnswers(choices) {
+        	for(var i = 0; i < choices.length; i ++) {
+        		for(var j = i+1; j < choices.length; j++) {
+        			if(choices[j] == choices[i]) {
+        				return choices[j];
+        			}
+        		}
+        	}
+        }
+
+        /** Take an array of question ids. */
+        function genQuestionPool(ids) {
         	var params = {};
-        	params.qpool_name = "Question";
-        	params.questions = 
+        	params.qpool_name = "Question Pool Sample";
         	$.ajax({
 				type: "POST",
 				url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/create",
 				data: params,
 				success: onSuccess
 			});
+        }
+
+        function sendQuestions() {
+        	genQuestions();
+        	// genQuestionPool();
         }
 
 		function handleFile(event) {

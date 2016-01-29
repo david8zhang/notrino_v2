@@ -66,5 +66,5 @@ function parseText(fileContents) {
         defHash.wordList.push(mainWord);
         defHash.defList.push(def);
     }
-    generateQuestions(defHash.wordList, defHash.defList);
+    return generateQuestions(defHash.wordList, defHash.defList);
 };
