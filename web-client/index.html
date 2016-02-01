@@ -77,23 +77,26 @@
         };
 
         /** Generate a bunch of questions. */
-        function genQuestions() {
+        function postQuestions(question_pool_id) {
         	var count = 0;
-        	var questionPools = [];
+        	var questions = [];
         	for (var key in questionPool) {
         		var params = {};
         		params.text = key;
         		var choices = questionPool[key];
         		params.choices = choices;
         		params.answer = findAnswers(choices);
-        		questionPools.push(params);
+        		params.question_pool_id = question_pool_id;
+        		questions.push(params);
         	}
-        		// $.ajax({
-        		// 	type: "POST",
-        		// 	url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/create",
-        		// 	data: params,
-        		// 	success: onSuccess
-        		// });
+        	var new_params = {};
+        	new_params.questions = questions;
+        	$.ajax({
+        		type: "POST",
+        		url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/batch",
+        		data: new_params,
+        		success: onSuccess
+        	});
         }
 
         /** Find the answers to the choices by checking for duplicates. */
@@ -108,20 +111,21 @@
         }
 
         /** Take an array of question ids. */
-        function genQuestionPool(ids) {
+        function genQuestionPool() {
         	var params = {};
         	params.qpool_name = "Question Pool Sample";
         	$.ajax({
 				type: "POST",
 				url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/create",
 				data: params,
-				success: onSuccess
+				success: onSetQPoolId
 			});
         }
 
         function sendQuestions() {
-        	genQuestions();
-        	// genQuestionPool();
+        	genQuestionPool();
+        	var question_pool_id = localStorage.getItem("question_pool_id");
+			postQuestions(question_pool_id);
         }
 
 		function handleFile(event) {
@@ -153,6 +157,12 @@
 			});
 		}
 
+		/** Set the question pool id in local storage, override when sending through a new question pool. */
+		function onSetQPoolId(data, textStatus, jqXHR) {
+			localStorage.setItem("question_pool_id", data.qpool_id);
+		}
+
+		/** Log the response from a successful API request. */
 		function onSuccess(data, textStatus, jqXHR) {
 			console.log(data);
 		}
