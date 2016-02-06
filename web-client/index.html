@@ -46,7 +46,9 @@
 		var reader = new FileReader();
 		var contents = "";
 		var isDefs = false;
+		var isMs = false;
 		var questionPool = [];
+		var questionMs = [];
 
 	    // Read the file, parse it and generate questions
         function readFile() {
@@ -81,6 +83,7 @@
         	var count = 0;
         	var questions = [];
         	for (var key in questionPool) {
+        		console.log(key);
         		var params = {};
         		params.text = key;
         		var choices = questionPool[key];
