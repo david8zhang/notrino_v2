@@ -134,4 +134,23 @@ public class ApiManager {
         });
         AppController.getInstance().addToRequestQueue(updateRequest);
     }
+
+    /** Subscribe to the Question Pool with the corresponding ID.*/
+    public void subscribeQPool(String user_id, String qpool_id) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("user_id", user_id);
+        params.put("question_pool_id", qpool_id);
+        DataRequest subscribeRequest = new DataRequest(Request.Method.POST, null, params, Constants.SUBSCRIBE_QPOOL, new Response.Listener() {
+            @Override
+            public void onResponse(Object o) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(subscribeRequest);
+    }
 }

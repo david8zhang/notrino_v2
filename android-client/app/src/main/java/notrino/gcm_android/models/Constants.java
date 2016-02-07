@@ -8,4 +8,5 @@ public class Constants {
     public final static String CREATE_USER_API = "https://infinite-anchorage-62838.herokuapp.com/api/v1/users/register";
     public final static String LOGIN_USER_API = "https://infinite-anchorage-62838.herokuapp.com/api/v1/users/login";
     public final static String UPDATE_USER_API = "https://infinite-anchorage-62838.herokuapp.com/api/v1/users/update";
+    public final static String SUBSCRIBE_QPOOL = "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/subscribe";
 }
