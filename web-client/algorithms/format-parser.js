@@ -18,19 +18,20 @@ function parseString(fileContents) {
             }
         }
     }
-    relational_questions = generateRelationQ(concept_mapping);
-    console.log(relational_questions);
-    question_pools.push(relational_questions);
+    // relational_questions = generateRelationQ(concept_mapping);
+    // console.log(relational_questions);
+    // question_pools.push(relational_questions);
     
-    fillblank_questions = generateFillBlankQ(concept_mapping);
-    console.log(fillblank_questions);
-    question_pools.push(fillblank_questions);
+    // fillblank_questions = generateFillBlankQ(concept_mapping);
+    // console.log(fillblank_questions);
+    // question_pools.push(fillblank_questions);
 
-    truefalse_questions = generateTrueFalseQ(concept_mapping);
-    console.log(truefalse_questions);
-    question_pools.push(truefalse_questions);
+    // truefalse_questions = generateTrueFalseQ(concept_mapping);
+    // console.log(truefalse_questions);
+    // question_pools.push(truefalse_questions);
 
-    return question_pools;
+    // return question_pools;
+    return generateRelationQ(concept_mapping);
 }
 
 // Generate relational questions

@@ -49,6 +49,7 @@
 		var isMs = false;
 		var questionPool = [];
 		var questionMs = [];
+		var question_ids = [];
 
 	    // Read the file, parse it and generate questions
         function readFile() {
@@ -98,7 +99,7 @@
         		type: "POST",
         		url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/batch",
         		data: new_params,
-        		success: onSuccess
+        		success: onSetQuestionIds
         	});
         }
 
@@ -165,8 +166,14 @@
 			localStorage.setItem("question_pool_id", data.qpool_id);
 		}
 
-		/** Log the response from a successful API request. */
-		function onSuccess(data, textStatus, jqXHR) {
+		/** Set the Question Id array from the response of a batch questio creation request. */
+		function onSetQuestionIds(data, textStatus, jqXHR) {
+			question_ids = data.question_ids;
+			console.log(question_ids);
+		}
+
+		/** Print the message from a successful API Request. */
+		function onPrintSuccess(data, textStatus, jqXHR) {
 			console.log(data);
 		}
 	</script>
