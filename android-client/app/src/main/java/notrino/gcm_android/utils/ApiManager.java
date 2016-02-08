@@ -143,12 +143,12 @@ public class ApiManager {
         DataRequest subscribeRequest = new DataRequest(Request.Method.POST, null, params, Constants.SUBSCRIBE_QPOOL, new Response.Listener() {
             @Override
             public void onResponse(Object o) {
-
+                System.out.println(o);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+                System.out.println(volleyError);
             }
         });
         AppController.getInstance().addToRequestQueue(subscribeRequest);

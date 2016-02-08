@@ -10,38 +10,37 @@ exports.handler = function(event, context) {
 	var q_pool_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/index";
 	var gcm_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1/gcm?";
 	var reg_tokens = [];
-	
+	var isComplete = false;
+
 	//Asynchronous function waterfall
 	async.waterfall([
 		function upload(next) {
 			client.get(q_pool_url, function(data, response) {
 				var length = data.Items.length;
 				for(var i = 0; i < length; i++) {
+					console.log(i);
 					var user_id = data.Items[i].user_id;
 					if(data.Items[i].subscribed != "null") {
 						client.get(user_url + "user_id=" + user_id, function(data, response) {
 							var reg_token = data.Items[0].reg_token;
-							if(reg_tokens.indexOf(reg_token) == -1) {
-								console.log(reg_token);
-								client.get(gcm_url + "reg_token=" + reg_token + "&type=new", function(data, response) {
-									console.log("Response: " + data);
-								})
-							}
-							reg_tokens.push(reg_token);
+							client.get(gcm_url + "reg_token=" + reg_token + "&type=new", function(data, response) {
+								console.log("Response: " + data);
+							})
 						})
 					}
+					if(i == length) {
+						console.log("Success!");
+						context.succeed("Success!");
+					}
 				}
-				reg_tokens.clear();
-				context.succeed("Completed");
 			})
 		}
 
 	], function(err) {
 		if(err) {
-			console.log('got an error');
-			console.log(err, err.stack);
+			context.fail(err);
 		} else {
-			console.log("Success!");
+			context.succeed("Success!");
 		}
 	})
 }
