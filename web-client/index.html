@@ -27,9 +27,6 @@
 		<p>For testing the note-parsing algorithms</p>
 		<input id="file-chooser" type="file"/>
 		<br>
-		<button onClick="handleFile()" class="btn btn-primary">Submit file! </button>
-		<br>
-		<br>
 		<button onClick="readFile()" class="btn btn-primary">Create MCQ </button>
 		<br>
 		<br>
@@ -129,11 +126,13 @@
 
         function sendQuestions() {
         	genQuestionPool();
-        	var question_pool_id = localStorage.getItem("question_pool_id");
-			postQuestions(question_pool_id);
         }
 
 		function handleFile(event) {
+			submitFile();
+		}
+
+		function submitFile(question_pool_id) {
 			AWS.config.region = 'us-east-1'		
 			AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 				IdentityPoolId: 'us-east-1:25457026-c042-4aa1-b844-be70570b71ec',
@@ -144,7 +143,7 @@
 				}
 			})
 			var file = $("#file-chooser")[0].files[0];
-			var filename = localStorage.getItem("user_id");
+			var filename = localStorage.getItem("user_id") + "&" + question_pool_id;
 			console.log(filename);
 			if(file) {
 				var params = {
@@ -164,7 +163,10 @@
 
 		/** Set the question pool id in local storage, override when sending through a new question pool. */
 		function onSetQPoolId(data, textStatus, jqXHR) {
+			postQuestions(data.qpool_id);
+			submitFile(data.qpool_id);
 			localStorage.setItem("question_pool_id", data.qpool_id);
+
 		}
 
 		/** Set the Question Id array from the response of a batch questio creation request. */

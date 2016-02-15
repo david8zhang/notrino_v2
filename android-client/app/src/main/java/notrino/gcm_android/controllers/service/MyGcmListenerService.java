@@ -12,7 +12,9 @@ import android.support.v4.app.NotificationCompat;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import notrino.gcm_android.R;
+import notrino.gcm_android.models.DataModelManager;
 import notrino.gcm_android.views.activities.MainActivity;
+import notrino.gcm_android.views.activities.SubscribeActivity;
 
 
 /**
@@ -27,6 +29,12 @@ public class MyGcmListenerService extends GcmListenerService {
         System.out.println("Message:" + data);
         System.out.println("type: " + data.getString("type"));
         sendNotification(data.getString("type"));
+
+        /** Set the question pool id and the user_id id. */
+        if(data.getString("type").equals("subscribe")) {
+            DataModelManager.setQpoolId(data.getString("qpool_id"));
+            DataModelManager.setUserId(data.getString("user_id"));
+        }
     }
 
     /** Show a toast, change this to a notification later. */
@@ -37,9 +45,9 @@ public class MyGcmListenerService extends GcmListenerService {
         } else if(label.equals("new")) {
             message = "A new question has arrived!";
         }
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        Intent subscribeIntent = new Intent(this, SubscribeActivity.class);
+        subscribeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, subscribeIntent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

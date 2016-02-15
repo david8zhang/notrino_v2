@@ -12,12 +12,17 @@ exports.handler = function(event, context) {
 	//Get the bucket name
 	var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
 	console.log("Srckey:" + srcKey);
+	var user_id = srcKey.substring(0, srcKey.indexOf("&"));
+	var qpool_id = srcKey.substring(srcKey.indexOf("&") + 1);
+	console.log("User id: " + user_id);
+	console.log("Question Pool Id " + qpool_id);
 	async.waterfall([
 		function upload(next) {
-			client.get(rest_url + "user_id=" + srcKey, function(data, response) {
+			client.get(rest_url + "user_id=" + user_id, function(data, response) {
 				var reg_token = data.Items[0].reg_token;
 				console.log(data.Items);
-				gcm_url = gcm_url + "reg_token=" + reg_token + "&type=" + "subscribe"; 
+				gcm_url = gcm_url + "reg_token=" + reg_token + "&qpool_id=" + qpool_id + "&user_id=" + user_id + "&type=" + "subscribe"; 
+				console.log(gcm_url);
 				client.get(gcm_url, function(data, response) {
 					console.log("Response:" + data);
 					context.succeed("Completed");
