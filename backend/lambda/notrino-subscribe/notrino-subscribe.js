@@ -5,8 +5,9 @@ var gcm = require('node-gcm');
 
 exports.handler = function(event, context) {
 	var srcBucket = event.Records[0].s3.bucket.name;
-	var gcm_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1/gcm?"
-	var rest_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1/users/index?"
+	//API Currently under construction
+	//var gcm_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1/gcm?"
+	//var rest_url = "https://infinite-anchorage-62838.herokuapp.com/api/v1/users/index?"
 	var client = new Client();
 
 	//Get the bucket name
