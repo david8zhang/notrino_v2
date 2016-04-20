@@ -5,33 +5,20 @@
 * @Author: David Zhang
 * @Description: A Cron-scheduler running on NodeJS Express Server
 **/
-var AWS = require('aws-sdk');
-var sha1 = require('sha-1');
-var docClient = new AWS.DynamoDB.DocumentClient({ region: 'us-west-1'});
 var express = require('express');
 var app = express();
 var cron = require('cron');
 var port = process.env.PORT || 8800;
-var cronJob = cron.job("* * * * * *", function() {
-    var params = {};
-    params.TableName = 'scheduled-task';
-    var task_id = sha1(Math.floor(Date.now()) / 1000).toString();
-    var task_name = "Hello world!";
-    var timestamp = Math.floor(Date.now() / 1000).toString();
-    params.Item = {
-        task_id: task_id,
-        task_name: task_name,
-        timestamp: timestamp
-    };
-    docClient.put(params, function(err, data) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log("Success!");
-        }
-    })
-});
-cronJob.start();
+var scheduledController = require('./controllers/scheduledController.js');
+
+/* Create a new database object (Asynchronous API request) */
+var cron1 = cron.job("0 * * * * *", scheduledController.createData);
+
+/* Query an in-house API (Asynchronous API request) */
+var cron2 = cron.job("*/5 * * * * *", scheduledController.task);
+
+cron1.start();
+cron2.start();
 
 app.listen(port);
 console.log('Listening on port ' + port);
