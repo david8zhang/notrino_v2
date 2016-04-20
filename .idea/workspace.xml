@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd87e3ee-ffb9-4641-805d-aeb3c260115e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/experiments/node-chron/controllers/scheduledController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experiments/node-chron/app.js" afterPath="$PROJECT_DIR$/experiments/node-chron/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experiments/node-chron/package.json" afterPath="$PROJECT_DIR$/experiments/node-chron/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="bd87e3ee-ffb9-4641-805d-aeb3c260115e" name="Default" comment="" />
     <ignored path="notrino_v2.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -29,20 +24,20 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+            <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/experiments/node-chron/app.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+                  <state vertical-scroll-proportion="0.07234043" vertical-offset="0" max-vertical-offset="940">
                     <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
                     <folding />
                   </state>
                 </provider>
               </entry>
             </file>
-            <file leaf-file-name="scheduledController.js" pinned="false" current-in-tab="true">
+            <file leaf-file-name="scheduledController.js" pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/experiments/node-chron/controllers/scheduledController.js">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state vertical-scroll-proportion="0.09042553" vertical-offset="0" max-vertical-offset="940">
+                  <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
                     <caret line="7" column="72" selection-start-line="7" selection-start-column="72" selection-end-line="7" selection-end-column="72" />
                     <folding>
                       <element signature="e#0#45#0" expanded="false" />
@@ -619,15 +614,15 @@
       <option name="number" value="Default" />
       <updated>1461044895855</updated>
       <workItem from="1461044896730" duration="2201000" />
-      <workItem from="1461130178335" duration="3112000" />
+      <workItem from="1461130178335" duration="4096000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5313000" />
+    <option name="totallyTimeSpent" value="6297000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-962" y="0" width="960" height="1040" extended-state="0" />
+    <frame x="-962" y="0" width="960" height="1040" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -754,6 +749,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/node-chron/controllers/scheduledController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
+          <caret line="7" column="72" selection-start-line="7" selection-start-column="72" selection-end-line="7" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#45#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/server/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3625" vertical-offset="38" max-vertical-offset="1275">
@@ -764,19 +769,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/node-chron/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+        <state vertical-scroll-proportion="0.07234043" vertical-offset="0" max-vertical-offset="940">
           <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/node-chron/controllers/scheduledController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09042553" vertical-offset="0" max-vertical-offset="940">
-          <caret line="7" column="72" selection-start-line="7" selection-start-column="72" selection-end-line="7" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#45#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
