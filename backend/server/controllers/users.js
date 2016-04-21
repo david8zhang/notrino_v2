@@ -20,6 +20,11 @@ exports.getUser = function(req, res) {
 	})
 };
 
+/** POST a new test user, for testing purposes only. **/
+exports.testUser = function(req, res) {
+	res.status(400).send("Need to implement!!");
+}
+
 /** POST a new user to the database. */
 exports.createUser = function(req, res) {
 	var user_id = sha1(Math.floor(Date.now() / 1000).toString());
@@ -66,8 +71,8 @@ exports.authUser = function(req, res) {
 	})
 };
 
-/** UPDATE the user information based on the request parameters. */
-exports.updateUser = function(req, res) {
+/** UPDATE User by attaching push_notifcation registration token. **/
+exports.tokenizeUser = function(req, res) {
 	var user_id = req.body.user_id;
 	var reg_token = req.body.reg_token;
 	var params = {};
