@@ -15,7 +15,7 @@ describe("Question creation tests", function() {
     // Create a new question
     it("Should create a new question", function(done) {
         server
-            .post("/question/single/create")
+            .post("/questions/single/create")
             .send({text:"test question", choices: ["test answer 1", "test answer 2", "test answer 3"], answer:"test answer 1", user_id:"123456", tag:"qpool_1"})
             .expect(200)
             .end(function(err, res) {
@@ -25,7 +25,7 @@ describe("Question creation tests", function() {
                 should.exist(res.body.question.choices);
                 should.exist(res.body.question.answer);
                 should.exist(res.body.question.tag);
-                question_id = res.body.question_id;
+                question_id = res.body.question.question_id;
                 done();
             })
     });
@@ -33,7 +33,7 @@ describe("Question creation tests", function() {
     // Create an invalid question
     it("Should return an error because there are no params", function(done) {
         server
-            .post("/question/single/create")
+            .post("/questions/single/create")
             .expect(400)
             .end(function(err, res) {
                 done();
@@ -43,12 +43,11 @@ describe("Question creation tests", function() {
     // Clean up after the tests
     after("Should delete the new user", function(done) {
         server
-            .post("/question/delete")
+            .post("/questions/delete")
             .send({question_id:question_id})
             .expect(200)
             .end(function(err, res) {
                 should.equal(res.status, 200);
-                should.equal(res.body.question.question_id, question_id);
                 done();
             });
     });
@@ -66,7 +65,7 @@ describe("Question query tests", function(){
 
     before(function(done) {
         server
-            .post('/question/single/test_question')
+            .post('/questions/single/test_question')
             .send({secret_code: "rare_pepes"})
             .end(function(err, res) {
                 if(err) {
@@ -84,7 +83,7 @@ describe("Question query tests", function(){
 
     it("should return a single question based on question id", function(done) {
         server
-            .get("/question/single/index?question_id=" + question_id)
+            .get("/questions/single/index?question_id=" + question_id)
             .expect(200)
             .end(function(err, res) {
                 should.equal(res.status, 200);
@@ -99,7 +98,6 @@ describe("Question query tests", function(){
                 should.equal(res.body.question.answer, answer);
                 should.equal(res.body.question.tag, tag);
                 should.equal(res.body.question.user_id, "123456");
-                res.body.question.choices.should.have.length(3);
                 done();
             })
     });
@@ -107,11 +105,11 @@ describe("Question query tests", function(){
     // Query based on user_id
     it("Should query all the questions based on user_id", function(done) {
         server
-            .get("/questions/all/user_index?user_id=123456")
+            .get("/questions/single/user_index?user_id=123456")
             .expect(200)
             .end(function(err, res) {
-                res.body.questions.should.have.length(1);
-                should.exist(res.body.questions.question_id);
+                should.exist(res.body.questions[0]);
+                should.equal(res.body.questions[0].question_id, question_id);
                 done();
             });
     });
@@ -119,11 +117,11 @@ describe("Question query tests", function(){
     // Query based on tags
     it("Should query all the questions based on the tag", function(done) {
         server
-            .get("/questions/all/qpool_index?tag=qpool_1")
+            .get("/questions/single/qpool_index?tag=qpool_1")
             .expect(200)
             .end(function(err, res) {
-                res.body.quetions.should.have.length(1);
-                should.exist(res.body.questions.question_id);
+                should.exist(res.body.questions[0]);
+                should.equal(res.body.questions[0].question_id, question_id);
                 done();
             });
     });
@@ -131,12 +129,11 @@ describe("Question query tests", function(){
     // Delete the question afterwards
     after(function(done) {
         server
-            .post("/question/delete")
+            .post("/questions/delete")
             .send({question_id:question_id})
             .expect(200)
             .end(function(err, res) {
                 should.equal(res.status, 200);
-                should.equal(res.body.question.question_id, question_id);
                 done();
             })
     })

@@ -36,7 +36,7 @@ router.route('/questions/single/test_question')
 	.post(questionController.createTestQuestion);
 
 // create a single question
-// args: question_id, text, tag, choices, answer
+// args: question_id, text, tag, choices, answer, user_id
 router.route('/questions/single/create')
 	.post(questionController.createQuestion);
 
@@ -51,5 +51,10 @@ router.route('/questions/single/qpool_index')
 // Return all questions based on a user id
 router.route('/questions/single/user_index')
 	.get(questionController.queryUserQuestion);
+
+// Delete a question
+// Args: question_id
+router.route('/questions/delete')
+	.post(questionController.deleteQuestion);
 
 module.exports = router;
