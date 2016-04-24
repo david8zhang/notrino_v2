@@ -37,7 +37,7 @@ describe("User unit tests", function() {
     it("should create a new user", function(done) {
         server
             .post("/users/register")
-            .send({username: "test_user", password: "password", email: "test_user@test_user.com", test:"on"})
+            .send({username: "new_user", password: "password", email: "user@user.com", test:"on"})
             .expect(200)
             .end(function(err, res) {
                 should.equal(res.status, 200);
@@ -53,11 +53,14 @@ describe("User unit tests", function() {
     /* Should access a user's profile. */
     it("should access a user's profile", function(done) {
         server
-            .get("/users/index?user_id=" + user_id)
+            .get("/users/profile?user_id="  + user_id)
             .expect(200)
-            .set('Authorization', 'bearer ' + token)
+            .set('Authorization', 'bearer ' + auth_token)
             .end(function(err, res) {
                 should.equal(res.status, 200);
+                should.exist(res.body.user.user_id);
+                should.exist(res.body.user.username);
+                should.exist(res.body.user.email);
                 should.equal(res.body.user.user_id, user_id);
                 should.equal(res.body.user.username, username);
                 should.equal(res.body.user.email, email);
@@ -70,7 +73,7 @@ describe("User unit tests", function() {
     /* Invalid token error. */
     it("should not be able to access the user's profile", function(done) {
         server
-            .get("users/index?user_id=" + user_id)
+            .get("/users/profile?user_id=" + user_id)
             .expect(403)
             .set('Authorization', 'bearer rare_pepes')
             .end(function(err, res){
@@ -86,6 +89,7 @@ describe("User unit tests", function() {
             .expect(200)
             .end(function(err, res) {
                 should.equal(res.status, 200);
+                should.equal(res.body.token.user_id, user_id);
                 should.equal(res.body.token.auth_token, auth_token);
                 done();
             })
@@ -103,7 +107,7 @@ describe("User unit tests", function() {
     });
 
     /* Should tokenize user. */
-    it("should change the user's username and password", function(done) {
+    it("should tokenize a user", function(done) {
         server
             .post("/users/tokenize")
             .send({user_id:user_id, reg_token:"123456"})

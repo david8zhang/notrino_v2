@@ -20,26 +20,9 @@ exports.getQuestion = function(req, res) {
 	})
 };
 
-/** GET all the questions. */
-exports.getQuestions = function(req, res) {
-	var question_pool_id = req.query.question_pool_id;
-	var params = {};
-	params.TableName = 'notrino_questions';
-	params.FilterExpression = 'question_pool_id = :question_pool_id';
-	params.ExpressionAttributeValues = {
-		":question_pool_id" : question_pool_id
-	};
-	docClient.scan(params, function(err, data) {
-		if(err) {
-			res.send(err);
-		} else {
-			res.json(data);
-		}
-	})
-};
-
 /** POST a new Question to the database. */
 exports.createQuestion = function(req, res) {
+
 	var question_id = sha1(Math.floor(Date.now() / 1000).toString());
 	var text = req.body.text;
 	var question_pool_id = req.body.question_pool_id;
