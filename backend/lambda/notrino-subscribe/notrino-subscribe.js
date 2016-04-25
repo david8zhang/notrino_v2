@@ -11,7 +11,7 @@ exports.handler = function(event, context) {
 	var client = new Client();
 
 	//Get the bucket name
-	var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
+	var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ""));
 	console.log("Srckey:" + srcKey);
 	var user_id = srcKey.substring(0, srcKey.indexOf("&"));
 	var qpool_id = srcKey.substring(srcKey.indexOf("&") + 1);

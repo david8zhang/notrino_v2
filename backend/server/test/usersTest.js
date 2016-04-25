@@ -12,6 +12,7 @@ describe("User unit tests", function() {
     var email = '';
     var user_id = '';
     var auth_token = '';
+    var reg_token = '';
 
     /* Create a backdoor route to test user index routes. */
     before(function(done) {
@@ -28,6 +29,7 @@ describe("User unit tests", function() {
                     password = res.body.user.password;
                     user_id = res.body.user.user_id;
                     auth_token = res.body.user.auth_token;
+                    reg_token = res.body.reg_token;
                 }
                 done();
             });
