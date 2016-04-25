@@ -2,12 +2,13 @@
  * Created by david_000 on 4/24/2016.
  */
 var AWS = require('aws-sdk');
-var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-1'});
+var docClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 var gcm = require('node-gcm');
+var API_KEY = "AIzaSyC9AaQPHRfB6-418kyV_swuROqty0kGKbM";
 
 exports.sendMessage = function() {
     var params = {};
-    params.TableName = 'notrino_users';
+    params.TableName = "notrino_users";
     docClient.scan(params, function(err, data) {
         if(err) {
             console.log(err);
@@ -18,13 +19,16 @@ exports.sendMessage = function() {
                     reg_tokens.push(data.Items[i].reg_token);
                 }
             }
-            distributeMessage(reg_tokens);
+            var message = new gcm.Message();
+            var sender = new gcm.Sender(API_KEY);
+            sender.send(message, {registrationTokens: reg_tokens}, function(err, response) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log(response);
+                }
+            });
         }
     })
 };
 
-function distributeMessage(reg_tokens) {
-    for (var i = 0, len = reg_tokens; i < len; i++) {
-
-    }
-}
