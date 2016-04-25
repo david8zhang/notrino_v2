@@ -48,6 +48,8 @@ describe("User unit tests", function() {
                 should.exist(res.body.user.email);
                 should.exist(res.body.user.timestamp);
                 should.exist(res.body.user.auth_token);
+                should.exist(res.body.user.reg_token);
+                should.equal(res.body.user.reg_token, "null");
                 done();
             })
     });
@@ -66,7 +68,6 @@ describe("User unit tests", function() {
                 should.equal(res.body.user.user_id, user_id);
                 should.equal(res.body.user.username, username);
                 should.equal(res.body.user.email, email);
-            //    Should not be able to query the password!
                 should.not.exist(res.body.user.password, password);
                 done();
             })
@@ -118,5 +119,17 @@ describe("User unit tests", function() {
                 should.equal(res.status, 200);
                 done();
             })
-    })
-})
+    });
+
+    // Clean up by deleting the test user afterwards.
+    after(function(done) {
+        server
+            .post("/users/delete")
+            .send({user_id:user_id})
+            .expect(200)
+            .end(function(err, res) {
+                should.equal(res.status, 200);
+                done();
+            })
+    });
+});

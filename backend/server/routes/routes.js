@@ -29,6 +29,11 @@ router.route('/users/tokenize')
 router.route('/users/test_user')
 	.post(userController.testUser);
 
+// delete a user
+// args: user_id
+router.route('/users/delete')
+	.post(userController.deleteUser);
+
 /* -------------------- QUESTION API ROUTES -------------------- */
 // create a question for testing purposes.
 // args: secret_code

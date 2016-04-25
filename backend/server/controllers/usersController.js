@@ -48,6 +48,7 @@ exports.testUser = function(req, res) {
 			username: username,
 			email: email,
 			password: password,
+			reg_token: "null",
 			auth_token: auth_token,
 			timestamp: timestamp
 		}
@@ -89,6 +90,7 @@ exports.createUser = function(req, res) {
 		username: username,
 		email: email,
 		password: password,
+		reg_token: "null",
 		auth_token: auth_token,
 		timestamp: timestamp
 	};
@@ -157,4 +159,22 @@ exports.tokenizeUser = function(req, res) {
 			res.status(200).send("Successfully updated user");
 		}
 	})
+};
+
+/** DELETE a user. **/
+exports.deleteUser = function(req, res) {
+	var user_id = req.body.user_id;
+	var params = {};
+	params.TableName = 'notrino_users';
+	params.Key = {
+		user_id: user_id
+	};
+	docClient.delete(params, function(err, data) {
+		if(err) {
+			console.log(err);
+			res.status(400).send(err);
+		} else {
+			res.status(200).send("User successfully deleted!");
+		}
+	});
 };
