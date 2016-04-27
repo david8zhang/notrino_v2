@@ -1,184 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation for Sites</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
 
-	<title>GCM test</title>
+    <!-- Desktop Navigation -->
+    <nav class="top-bar nav-desktop">
+      <div class="wrap">
+        <div class="top-bar-left">
+          <h2 class="site-logo">Notrino</h2>
+        </div>
+        <div class="top-bar-right">
+          <span class="launch-button" href="#">Launch</span>
+        </div>
+      </div>
+    </nav>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Jumbo Section -->
+    <section class="jumbo">
+      <div class="wrap row">
+        <div class="small-12 medium-6 column">
+          <img class="icon" src="./img/brain.png" alt=""/>
+        </div>
+        <div class="small-12 medium-6 column">
+          <h2>Cramming, Shramming.</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eius hic ipsa nulla. Accusantium architecto aspernatur non nostrum qui! Blanditiis commodi consequuntur dolorem ea illo ipsam iusto quibusdam reiciendis repellendus.</p>
+          <button type="button" class="start-button large button">Get Started</button>
+        </div>
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+      </div>
+    </section>
 
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-	<!-- AWS sdk and JQUERY -->
-	<script src="./javascripts/aws-sdk.min.js"></script>
-	<script src="./javascripts/jquery.min.js"></script>
-	<script src="./javascripts/jquery.js"></script>
-	<script src="./javascripts/amazon-cognito.min.js"></script>
+    <!-- About Section -->
+    <section class="about">
+      <div class="wrap row">
+        <div class="small-12 medium-6 column">
+          <h4>The science is in.</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid blanditiis commodi dolorem et ex exercitationem fuga hic id illo iste iusto labore nam nemo non, quae quam quibusdam reprehenderit.</p>
 
-	<!-- Our algorithms -->
-	<script src="./algorithms/JSParse.js"></script>
-	<script src="./algorithms/format-parser.js"></script>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid blanditiis commodi dolorem et ex exercitationem fuga hic id illo iste iusto labore nam nemo non, quae quam quibusdam reprehenderit.</p>
+          <a class="hover-text" href="#">See how it works</a>
+        </div>
+        <div class="small-12 medium-6 column">
+          <img class="clock-icon" src="./img/clock-flat.png" alt=""/>
+        </div>
 
-	<div class="container">
-		<p>For testing the note-parsing algorithms</p>
-		<input id="file-chooser" type="file"/>
-		<br>
-		<button onClick="readFile()" class="btn btn-primary">Create MCQ </button>
-		<br>
-		<br>
-		<button onClick="createDef()" class="btn btn-primary">Create DefQ </button>
-		<br>
-		<br>
-		<button onClick="sendQuestions()" class="btn btn-primary">Send Questions </button>
-		<a href="login.html">Login Here</a>
-	</div>
+      </div>
+    </section>
 
-</head>
-<body>
-	<script type="text/javascript">
-		var reader = new FileReader();
-		var contents = "";
-		var isDefs = false;
-		var isMs = false;
-		var questionPool = [];
-		var questionMs = [];
-		var question_ids = [];
+    <!-- Features Section -->
+    <section class="features">
+      <h1>Features</h1>
+    </section>
 
-	    // Read the file, parse it and generate questions
-        function readFile() {
-            var file = $('#file-chooser').get(0).files[0]; 
-            isDefs = false;           
-            reader.readAsText(file)
-        }
+    <!-- Platforms Section -->
+    <section class="platforms">
+      <h3>Platforms</h3>
+    </section>
 
-        function createDef() {
-        	var file = $('#file-chooser').get(0).files[0];
-        	isDefs = true;
-        	reader.readAsText(file);
-        }
 
-        // Specify reader's onload functionality
-        reader.onload = function(event) {
-            contents = event.target.result;
-            if(isDefs) {
-            	questionPool = parseText(contents);
-            } else {
-            	questionPool = parseString(contents);
-            }
-        };
+    <!-- Footer -->
+    <footer>
+      <h3>Footer Section</h3>
+    </footer>
 
-        // Specify what to do if reader encounters an error
-        reader.onerror = function(event) {
-            console.error("File could not be read! Code " + event.target.error.code);
-        };
 
-        /** Generate a bunch of questions. */
-        function postQuestions(question_pool_id) {
-        	var count = 0;
-        	var questions = [];
-        	for (var key in questionPool) {
-        		console.log(key);
-        		var params = {};
-        		params.text = key;
-        		var choices = questionPool[key];
-        		params.choices = choices;
-        		params.answer = findAnswers(choices);
-        		params.question_pool_id = question_pool_id;
-        		questions.push(params);
-        	}
-        	var new_params = {};
-        	new_params.questions = questions;
-        	$.ajax({
-        		type: "POST",
-        		url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/single/batch",
-        		data: new_params,
-        		success: onSetQuestionIds
-        	});
-        }
-
-        /** Find the answers to the choices by checking for duplicates. */
-        function findAnswers(choices) {
-        	for(var i = 0; i < choices.length; i ++) {
-        		for(var j = i+1; j < choices.length; j++) {
-        			if(choices[j] == choices[i]) {
-        				return choices[j];
-        			}
-        		}
-        	}
-        }
-
-        /** Take an array of question ids. */
-        function genQuestionPool() {
-        	var params = {};
-        	params.user_id = localStorage.getItem("user_id");
-        	params.qpool_name = "Question Pool Sample";
-        	$.ajax({
-				type: "POST",
-				url: "https://infinite-anchorage-62838.herokuapp.com/api/v1/questions/pools/create",
-				data: params,
-				success: onSetQPoolId
-			});
-        }
-
-        function sendQuestions() {
-        	genQuestionPool();
-        }
-
-		function handleFile(event) {
-			submitFile();
-		}
-
-		function submitFile(question_pool_id) {
-			AWS.config.region = 'us-east-1'		
-			AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-				IdentityPoolId: 'us-east-1:25457026-c042-4aa1-b844-be70570b71ec',
-			});
-			var bucket = new AWS.S3({
-				params: {
-					Bucket: 'notrino-notes'
-				}
-			})
-			var file = $("#file-chooser")[0].files[0];
-			var filename = localStorage.getItem("user_id") + "&" + question_pool_id;
-			console.log(filename);
-			if(file) {
-				var params = {
-					Key: filename,
-					ContentType: file.type,
-					Body: file
-				}
-			}
-			bucket.putObject(params, function(err, data) {
-				if(err) {
-					console.log(err); 
-				} else {
-					console.log(data);
-				}
-			});
-		}
-
-		/** Set the question pool id in local storage, override when sending through a new question pool. */
-		function onSetQPoolId(data, textStatus, jqXHR) {
-			postQuestions(data.qpool_id);
-			submitFile(data.qpool_id);
-			localStorage.setItem("question_pool_id", data.qpool_id);
-
-		}
-
-		/** Set the Question Id array from the response of a batch questio creation request. */
-		function onSetQuestionIds(data, textStatus, jqXHR) {
-			question_ids = data.question_ids;
-			console.log(question_ids);
-		}
-
-		/** Print the message from a successful API Request. */
-		function onPrintSuccess(data, textStatus, jqXHR) {
-			console.log(data);
-		}
-	</script>
-</body>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>

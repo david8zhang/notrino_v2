@@ -1,0 +1,129 @@
+/*******************************
+*       GENERAL STYLES         *
+********************************/
+.wrap {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/*******************************
+*         NAVBAR STYLES        *
+********************************/
+.nav-desktop {
+    height: 80px;
+    padding: 0px;
+    background: #1952a2;
+}
+
+.site-logo {
+    line-height: 80px;
+    color: #ffffff;
+}
+
+.launch-button {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 20px;
+    text-align: center;
+    padding: 15px 40px;
+    background: #ffffff;
+    color: #1952a2;
+    font-size: 20px;
+    border-radius: 100px;
+    margin: 15px -65px;
+    cursor: pointer;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+}
+
+.launch-button:hover,
+.launch-button:focus {
+    background-color:#2975de;
+    color: #ffffff;
+}
+
+/*******************************
+*         JUMBO STYLES         *
+********************************/
+
+.jumbo {
+    background-color: #2975de;
+    padding: 80px 0px;
+    background-image: url("../img/pattern.png");
+}
+
+.jumbo h2, p {
+    color: #ffffff;
+}
+
+.start-button {
+    background-color: #7eb530;
+    border-radius: 100px;
+    padding: 15px 60px;
+}
+
+.start-button:hover,
+.start-button:focus {
+    background-color: #628d25;
+}
+
+.icon {
+    display: inline-block;
+    max-width: 300px;
+    max-height: 300px;
+    align-content: center;
+    margin: -10px 0px 0px 204px;
+}
+
+/*******************************
+*         ABOUT STYLES         *
+********************************/
+
+.about {
+    background-color: #f0f0f0;
+    padding: 80px 0px;
+}
+
+.about h4 {
+    color: #222;
+}
+
+.about p {
+    color: #707070;
+}
+
+.clock-icon {
+    width: 300px;
+    height: 300px;
+    margin: -23px 0px 0px 85px;
+}
+
+.hover-text {
+    color: deepskyblue;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+}
+
+.hover-text:hover,
+.hover-text:focus {
+    color: #0086b3;
+}
+
+/*******************************
+*         FEATURES STYLES      *
+********************************/
+.features {
+    padding: 80px 0px;
+}
+
+
+/*******************************
+*         PLATFORMS STYLES     *
+********************************/
+.platforms {
+    background-color: #778899;
+    padding: 80px 0px;
+}
+
+/*******************************
+*         FOOTERS STYLES       *
+********************************/
