@@ -10,6 +10,21 @@
   </head>
   <body>
 
+
+  <!-- Login Modal -->
+  <div class="tiny reveal login" id="loginModal" data-reveal>
+    <button type="button" class="sign_in alert button">Sign in with Google</button>
+    <br/>
+    <button type="button" class="sign_in button">Sign in with Facebook</button>
+    <br/>
+    <h4>or</h4>
+    <input type="text" placeholder="Username"/>
+    <input type="password" placeholder="Password"/>
+    <input type="email" placeholder="Email"/>
+    <button type="button" class="success sign_in button">Submit</button>
+    <a href="#" class="forgot_password">Forgot Password?</a>
+  </div>
+
     <!-- Desktop Navigation -->
     <nav class="top-bar nav-desktop">
       <div class="wrap">
@@ -17,7 +32,7 @@
           <h2 class="site-logo">Notrino</h2>
         </div>
         <div class="top-bar-right">
-          <span class="launch-button" href="#">Launch</span>
+          <a class="launch-button" data-open="loginModal">Login</a>
         </div>
       </div>
     </nav>
@@ -25,15 +40,16 @@
     <!-- Jumbo Section -->
     <section class="jumbo">
       <div class="wrap row">
-        <div class="small-12 medium-6 column">
+        <div class="small-12 medium-5 column">
           <img class="icon" src="./img/brain.png" alt=""/>
         </div>
-        <div class="small-12 medium-6 column">
-          <h2>Cramming, Shramming.</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eius hic ipsa nulla. Accusantium architecto aspernatur non nostrum qui! Blanditiis commodi consequuntur dolorem ea illo ipsam iusto quibusdam reiciendis repellendus.</p>
-          <button type="button" class="start-button large button">Get Started</button>
+        <div class="small-12 medium-7 column">
+          <div class="jumbo-content">
+            <h2>Cramming, Shramming.</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eius hic ipsa nulla.</p>
+            <button type="button" class="start-button large button">Get Started</button>
+          </div>
         </div>
-
       </div>
     </section>
 
@@ -41,14 +57,14 @@
     <!-- About Section -->
     <section class="about">
       <div class="wrap row">
-        <div class="small-12 medium-6 column">
+        <div class="small-12 medium-8 column">
           <h4>The science is in.</h4>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid blanditiis commodi dolorem et ex exercitationem fuga hic id illo iste iusto labore nam nemo non, quae quam quibusdam reprehenderit.</p>
 
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid blanditiis commodi dolorem et ex exercitationem fuga hic id illo iste iusto labore nam nemo non, quae quam quibusdam reprehenderit.</p>
           <a class="hover-text" href="#">See how it works</a>
         </div>
-        <div class="small-12 medium-6 column">
+        <div class="small-12 medium-4 column">
           <img class="clock-icon" src="./img/clock-flat.png" alt=""/>
         </div>
 
@@ -57,18 +73,76 @@
 
     <!-- Features Section -->
     <section class="features">
-      <h1>Features</h1>
+      <div class="wrap">
+        <h3 class="feature_title">
+          Built for the chronic procrastinator.
+        </h3>
+        <div class="row feature_set">
+          <div class="small-12 medium-4 column">
+            <h4>Feature 1</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet consectetur corporis doloremque eum facere, fuga iure magni molestiae nam nisi porro reiciendis reprehenderit sunt ut vero vitae voluptate voluptatum.</p>
+
+            <h4>Feature 2</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at dicta dolorum enim, expedita illo, molestias nesciunt odit quos repudiandae, sed velit veritatis voluptate. Aliquam aspernatur expedita harum mollitia quis.</p>
+          </div>
+          <div class="small-12 medium-4 column">
+            <img src="./img/laptop.png" alt=""/>
+          </div>
+          <div class="small-12 medium-4 column">
+            <h4>Feature 3</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at dicta dolorum enim, expedita illo, molestias nesciunt odit quos repudiandae, sed velit veritatis voluptate. Aliquam aspernatur expedita harum mollitia quis.</p>
+            <h4>Feature 4</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab at dicta dolorum enim, expedita illo, molestias nesciunt odit quos repudiandae, sed velit veritatis voluptate. Aliquam aspernatur expedita harum mollitia quis.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Platforms Section -->
     <section class="platforms">
-      <h3>Platforms</h3>
+      <div class="wrap">
+        <div class="row">
+          <div class="small-12 medium-7 column">
+            <h4>Study on the go.</h4>
+            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores fugiat incidunt porro quos suscipit voluptatum! Aliquid asperiores culpa dignissimos, dolor eveniet harum laboriosam minima nulla omnis quaerat sint suscipit, totam!</p>
+            <button type="button" class="button wide">Android</button>
+            <button type="button" class="button wide">iOS</button>
+            <button type="button" class="button wide">Windows</button>
+
+          </div>
+          <div class="small-12 medium-5 column">
+            <img src="./img/devices.png" alt=""/>
+          </div>
+        </div>
+      </div>
     </section>
 
 
     <!-- Footer -->
-    <footer>
-      <h3>Footer Section</h3>
+    <footer >
+      <div class="row wrap small-up-1 medium-up-3">
+        <div class="column">
+          <h4>Contact Info</h4>
+          <hr class="white_line"/>
+          <a href="#"><span>Phone</span> 123 456 7890</a>
+          <a href="#"><span>Email</span> info@company.com</a>
+          <a href="#"><span>Address</span> 123 Center Street </a>
+        </div>
+        <div class="column">
+          <h4>Site Map</h4>
+          <hr class="white_line"/>
+          <a href="#">About Us</a>
+          <a href="#">Services</a>
+          <a href="#">Contact Us</a>
+        </div>
+        <div class="column">
+          <h4>Social Media</h4>
+          <hr class="white_line"/>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
     </footer>
 
 
@@ -76,5 +150,7 @@
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/app.js"></script>
+    <script type="text/javascript">
+    </script>
   </body>
 </html>

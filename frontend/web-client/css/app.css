@@ -8,6 +8,43 @@
 }
 
 /*******************************
+*         LOGIN STYLES         *
+********************************/
+.reveal.tiny {
+    width: 24%;
+    border-radius: 10px;
+}
+
+.login {
+    text-align: center;
+    padding: 50px 50px;
+}
+
+.login input {
+    border-radius: 10px;
+}
+
+.login h4 {
+    color: dimgray;
+}
+
+.sign_in {
+    width: 360px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.forgot_password {
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    font-weight: bolder;
+}
+
+.forgot_password:hover,
+.forgot_password:focus {
+    color: darkblue;
+}
+/*******************************
 *         NAVBAR STYLES        *
 ********************************/
 .nav-desktop {
@@ -47,6 +84,7 @@
 ********************************/
 
 .jumbo {
+    height: 700px;
     background-color: #2975de;
     padding: 80px 0px;
     background-image: url("../img/pattern.png");
@@ -54,6 +92,10 @@
 
 .jumbo h2, p {
     color: #ffffff;
+}
+
+.jumbo h2 {
+    font-weight: 600;
 }
 
 .start-button {
@@ -68,11 +110,18 @@
 }
 
 .icon {
-    display: inline-block;
-    max-width: 300px;
-    max-height: 300px;
-    align-content: center;
-    margin: -10px 0px 0px 204px;
+    margin-top: 20%;
+    max-width: 500px;
+    max-height: 500px;
+    margin-left: 10%;
+}
+
+.jumbo-content {
+    font-size: 20px;
+    text-align: center;
+    display: table-cell;
+    padding-top: 123px;
+    padding-right: 10px;
 }
 
 /*******************************
@@ -112,18 +161,81 @@
 *         FEATURES STYLES      *
 ********************************/
 .features {
+    background-color: #E7E7E7;
     padding: 80px 0px;
 }
 
+.feature_title {
+    color: dimgray;
+    text-align: center;
+    margin-top: -30px;
+    padding-bottom: 50px;
+}
+
+.feature_set {
+    text-align: center;
+}
+
+.features p {
+    color: dimgray;
+}
 
 /*******************************
 *         PLATFORMS STYLES     *
 ********************************/
 .platforms {
-    background-color: #778899;
+    background-color: #fffff;
     padding: 80px 0px;
 }
 
+.platforms img{
+    margin-top: -50px;
+}
+
+.platforms p {
+    color: dimgray;
+}
+
+.wide {
+    padding: 10px 50px;
+}
 /*******************************
 *         FOOTERS STYLES       *
 ********************************/
+footer {
+    background-color: #222;
+    color: white;
+    padding: 80px 0px;
+    font-size: 20px;
+    background-image: url("../img/pattern.png");
+}
+
+footer hr {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 10px 0px;
+}
+
+footer h4 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.3em;
+}
+
+footer a {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8em;
+}
+
+footer a span {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.3);
+
+}
+
+a:hover, a:focus {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.white_line {
+    border-color: #ffffff;
+}
