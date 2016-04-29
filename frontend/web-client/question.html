@@ -11,6 +11,36 @@
           href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css"/>
   </head>
   <body>
+
+    <!-- Login Modal -->
+    <div class="tiny reveal login" id="profileModal" data-reveal>
+      <h3>johncena</h3>
+      <label class="success label"><i class="fi-crown"></i> Meme Master</label>
+      <label class="alert label"><i class="fi-trophy"></i> Question Destroyer</label>
+      <label class="warning label"><i class="fi-star"></i > Surprise Motherfucker</label>
+      <label class="label"> <i class="fi-flag"></i> Ayy Lmao </label>
+      <h6>john@cena.com</h6>
+      <img class="profile_picture" src="./img/profile_pic.jpg" alt=""/>
+      <a href="#">View full profile</a>
+      <hr/>
+      <div class="callout">
+        <h5>Recent Activity</h5>
+        <ul>
+          <li>
+            <div class="callout">
+              <h5>Did something...</h5>
+            </div>
+          </li>
+          <li>
+            <div class="callout">
+              <h5>Did something else...</h5>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
     <!-- Desktop Navigation -->
     <nav class="top-bar nav-desktop">
       <div class="wrap">
@@ -18,7 +48,7 @@
           <h2 class="site-logo">Notrino</h2>
         </div>
         <div class="top-bar-right">
-          <a href="#" class="launch-button">Profile</a>
+          <a href="#" class="launch-button" data-open="profileModal">Profile</a>
         </div>
       </div>
     </nav>
@@ -192,6 +222,8 @@
       </div>
     </section>
 
+
+
     <!-- Footer section. -->
     <footer>
       <div class="row wrap small-up-1 medium-up-3">
@@ -218,5 +250,10 @@
         </div>
       </div>
     </footer>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
