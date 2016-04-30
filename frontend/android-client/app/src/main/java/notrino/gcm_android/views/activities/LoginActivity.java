@@ -1,11 +1,14 @@
 package notrino.gcm_android.views.activities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,22 +28,10 @@ public class LoginActivity extends AppCompatActivity{
 
         final ApiManager api = new ApiManager(this);
 
-        final TextView emailView = (TextView)findViewById(R.id.email);
-        final TextView passView = (TextView)findViewById(R.id.password);
-
-        Button createAcc = (Button)findViewById(R.id.create_user);
-        createAcc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = emailView.getText().toString();
-                String password = passView.getText().toString();
-
-                ArrayList<String> params = new ArrayList<>();
-                params.add(password);
-                params.add(email);
-                api.createUser(params);
-            }
-        });
+        final EditText emailView = (EditText)findViewById(R.id.email);
+        final EditText passView = (EditText)findViewById(R.id.password);
+        passView.setTypeface(Typeface.DEFAULT);
+        passView.setTransformationMethod(new PasswordTransformationMethod());
 
         Button login = (Button)findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
