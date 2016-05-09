@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button profile = (Button)findViewById(R.id.profile_stuff);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toProfile = new Intent(MainActivity.this, ProfileActivity.class);
+                MainActivity.this.startActivity(toProfile);
+            }
+        });
+
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
